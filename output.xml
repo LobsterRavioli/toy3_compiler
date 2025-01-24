@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Program>
+    
+    <VariableDeclarationOperationNode Type="INTEGER">
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="var1">
+</IdentifierNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+    </VariableDeclarationOperationNode>
+    
+    <VariableDeclarationOperationNode Type="INTEGER">
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="hello">
+</IdentifierNode>
+            
+            <BinaryOperationNode Operation="TIMES">
+                
+                <DoubleConstNode value="56.3">
+</DoubleConstNode>
+                
+                <IntegerConstNode value="77">
+</IntegerConstNode>
+                
+            </BinaryOperationNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="var2">
+</IdentifierNode>
+            
+            <StringConstantNode value="ciao">
+</StringConstantNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+    </VariableDeclarationOperationNode>
+    
+    <WriteOperationNode Type="true">
+        
+        <BinaryOperationNode Operation="NE">
+            
+            <IdentifierNode Type="ciao">
+</IdentifierNode>
+            
+            <IdentifierNode Type="hello">
+</IdentifierNode>
+            
+        </BinaryOperationNode>
+        
+    </WriteOperationNode>
+    
+    <IfThenElseOperationNode>
+        
+        <BinaryOperationNode Operation="EQ">
+            
+            <IdentifierNode Type="hello">
+</IdentifierNode>
+            
+            <IdentifierNode Type="when">
+</IdentifierNode>
+            
+        </BinaryOperationNode>
+        
+        <BodyOperationNode>
+            Type="
+            <WriteOperationNode Type="false">
+                
+                <StringConstantNode value="Yes">
+</StringConstantNode>
+                
+            </WriteOperationNode>
+            
+        </BodyOperationNode>
+        
+        <BodyOperationNode>
+            Type="
+            <WriteOperationNode Type="false">
+                
+                <StringConstantNode value="No">
+</StringConstantNode>
+                
+            </WriteOperationNode>
+            
+        </BodyOperationNode>
+        
+    </IfThenElseOperationNode>
+    
+    <WriteOperationNode Type="false">
+        
+        <UnaryOperationNode Operation="MINUS">
+            
+            <IntegerConstNode value="7">
+</IntegerConstNode>
+            
+        </UnaryOperationNode>
+        
+    </WriteOperationNode>
+    
+</Program>

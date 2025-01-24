@@ -1,0 +1,24 @@
+Inserisci l'operazione da effettuare (somma, sottrazione, divisione, moltiplicazione, tutteleoperazioni): moltiplicazione
+Inserisci il primo input: 4
+Inserisci il secondo input: 2
+Hai scelto l'operazione moltiplicazione con gli argomenti 4.000000 e 2.000000
+Il risultato è: 8.000000
+Vuoi continuare? (1 yes/0 no): 1
+Inserisci l'operazione da effettuare (somma, sottrazione, divisione, moltiplicazione, tutteleoperazioni): tutteleoperazioni
+Inserisci il primo input: 12
+Inserisci il secondo input: 12
+Hai scelto l'operazione tutteleoperazioni con gli argomenti 12.000000 e 12.000000
+Ciao! I risultati delle 4 operazioni sono
+24.000000
+0.000000
+1.000000
+144.000000
+
+Vuoi continuare? (1 yes/0 no): 1
+Inserisci l'operazione da effettuare (somma, sottrazione, divisione, moltiplicazione, tutteleoperazioni): divisione
+Inserisci il primo input: 3
+Inserisci il secondo input: 4
+Hai scelto l'operazione divisione con gli argomenti 3.000000 e 4.000000
+Il risultato è: 0.750000
+Vuoi continuare? (1 yes/0 no): 0
+

@@ -1,0 +1,14 @@
+program
+
+begin
+    var1 : int;
+    var2 ="ciao" | hello = 56.3*77 : int;
+    (ciao<>hello) !>>;
+
+    if (hello == when) then{
+        "Yes">>;
+    }else{
+    "No">>;
+    }
+    -7 >>;
+ end

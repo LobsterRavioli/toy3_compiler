@@ -1,0 +1,212 @@
+// CUP specification for a simple expression evaluator (no actions)
+
+import main.node.expr.constants.*;
+import main.node.expr.operations.*;
+import main.node.stat.*;
+import main.node.expr.*;
+import java_cup.runtime.*;
+import java.util.ArrayList;
+import main.node.*;
+import main.node.body.*;
+import main.node.vardecl.*;
+import main.node.pardecl.*;
+import main.node.defdecl.*;
+import main.node.program.*;
+import main.node.expr.operations.*;
+/* Terminals (tokens returned by the scanner). */
+/** Keywords **/
+terminal            IF, THEN, ELSE;
+terminal            WHILE, DO, RETURN;
+terminal            REF, DEF;
+terminal            INT, BOOL, DOUBLE, STRING, CHAR;
+terminal            PROGRAM, BEGIN, END;
+
+/** Constants **/
+terminal            TRUE, FALSE;
+terminal            int INT_CONST;
+terminal            double DOUBLE_CONST;
+terminal            char CHAR_CONST;
+terminal            STRING_CONST;
+
+/** Operators **/
+terminal            PLUS, MINUS, TIMES, DIV, UMINUS;
+terminal            AND, OR, NOT;
+terminal            GT, GE, LT, LE, EQ, NE; //NE is missing in the syntactic specification
+
+/** Parenthesis & Symbols **/
+terminal            LPAR, RPAR, LBRAC, RBRAC;
+terminal            PIPE, COMMA;
+terminal            SEMI;
+terminal            ASSIGN, COLON, ASSIGNDECL;
+
+/** Identifiers **/
+terminal String ID;
+
+/** Read & Write **/
+terminal IN, OUT, OUTNL;
+
+/* Non terminals */
+non terminal        Programma;
+non terminal        AirthOp, BoolOp, RelOp;
+
+/** Expressions & Statements **/
+non terminal        Expr;
+non terminal        ArrayList<ExpressionOperationNode> Exprs;
+non terminal        Stat;
+non terminal        ArrayList<StatementOperationNode> Statements;
+non terminal        Body;
+non terminal        FunCall;
+
+/** Types and Constants **/
+non terminal        OptType, TypeOrConstant;
+non terminal        Constant, Type;
+
+/** List of variables **/
+non terminal        ParDecl;
+non terminal ArrayList<ParenthesisDeclarationOperationNode> ParDecls;
+non terminal DefDecl, VarDecl;
+non terminal ArrayList <VariableDeclarationOperationNode> VarDecls;
+
+non terminal ArrayList<DeclsOperationNode> Decls;
+non terminal        ArrayList<IdentifierNode> Vars;
+non terminal        PVar;
+non terminal        ArrayList<ParenthesisVariablesNode> PVars;
+non terminal        ArrayList<VariableOptionalInitializerNodeOperator> VarsOptInit;
+
+/* Precedences */
+precedence left OR;
+precedence left AND;
+precedence right NOT;
+precedence left GT, GE, LT, LE, EQ, NE;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIV;
+precedence left UMINUS;
+precedence left LPAR, RPAR; //Check if it is correct
+
+/* The grammar */
+Programma ::= PROGRAM Decls:outer_declaration BEGIN VarDecls:inner_declaration Statements:statements END {:RESULT = new ProgramOperationNode(outer_declaration, inner_declaration, statements);:};
+
+Decls ::= VarDecl:declaration Decls:list {:list.add(0, (DeclsOperationNode) declaration); RESULT=list;:}
+      | DefDecl:declaration Decls:list {:list.add(0, (DeclsOperationNode) declaration);RESULT=list;:}
+      | {: ArrayList<DeclsOperationNode> list = new ArrayList<>();
+        RESULT = list;:}; /* empty */
+
+VarDecls ::= VarDecls:list VarDecl:declaration {:list.add((VariableDeclarationOperationNode) declaration); RESULT = list;:}
+         | {: ArrayList<VariableDeclarationOperationNode> list = new ArrayList<>();
+                                    RESULT = list;:}; /* empty */
+
+// Dichiarazione delle variabili sia opzionali che non
+VarDecl ::= VarsOptInit:vars COLON TypeOrConstant:typeOrConstant SEMI{:RESULT= new VariableDeclarationOperationNode(vars,typeOrConstant);:};
+
+
+
+VarsOptInit ::= ID:identifier PIPE VarsOptInit:list {:list.add(new VariableOptionalInitializerNodeOperator(new IdentifierNode(identifier))); RESULT = list;:}
+            | ID:identifier ASSIGNDECL Expr:expression PIPE VarsOptInit:list{:   list.add(new VariableOptionalInitializerNodeOperator(new IdentifierNode(identifier), expression) );
+                                                                            RESULT = list;:}
+            | ID:identifier {:                  ArrayList<VariableOptionalInitializerNodeOperator> list = new ArrayList<>();
+                                            list.add(new VariableOptionalInitializerNodeOperator(new IdentifierNode(identifier)));
+                                            RESULT = list;:}
+            | ID:identifier ASSIGNDECL Expr:expression {:ArrayList<VariableOptionalInitializerNodeOperator> list = new ArrayList<>();
+                                                                               list.add(new VariableOptionalInitializerNodeOperator(new IdentifierNode(identifier),expression));
+                                                                               RESULT = list;:};
+
+TypeOrConstant ::= Type:type {:RESULT=type;:}
+               | Constant:constant {:RESULT=constant;:};
+
+Type ::= INT    {:RESULT=Type.INTEGER;:}
+     | BOOL     {:RESULT=Type.BOOLEAN;:}
+     | DOUBLE   {:RESULT=Type.DOUBLE;:}
+     | STRING {:RESULT=Type.STRING;:}
+     | CHAR     {:RESULT=Type.CHAR;:};
+
+Constant ::= TRUE           {:RESULT=new TrueConstantNode();:}
+         | FALSE            {:RESULT=new FalseConstantNode();:}
+         | INT_CONST:e        {:RESULT=new IntegerConstNode(e);:}
+         | DOUBLE_CONST:e   {:RESULT=new DoubleConstNode(e);:}
+         | CHAR_CONST:e       {:RESULT=new CharConstantNode(e);:}
+         | STRING_CONST:e   {:RESULT=new StringConstantNode(e); :};
+
+DefDecl ::= DEF ID:id LPAR ParDecls:declarations RPAR OptType:type Body:body {:RESULT = new DefDeclarationNode(declarations, new IdentifierNode(id),type,body);:}
+        | DEF ID:id LPAR RPAR OptType:type Body:body {:RESULT = new DefDeclarationNode(new IdentifierNode(id),type,body);:};
+
+ParDecls ::= ParDecl:declaration SEMI ParDecls:list {:list.add((ParenthesisDeclarationOperationNode)declaration); RESULT=list;:}
+         | ParDecl:declaration {:ArrayList<ParenthesisDeclarationOperationNode> list = new ArrayList<>();
+                    list.add((ParenthesisDeclarationOperationNode)declaration);
+                    RESULT= list;:};
+
+ParDecl ::= PVars:list COLON Type:type {:RESULT= new ParenthesisDeclarationOperationNode(list,type);:};
+
+PVars ::= PVar:pvar COMMA PVars:list {:list.add((ParenthesisVariablesNode) pvar); RESULT=list;:}
+      | PVar:var {:ArrayList<ParenthesisVariablesNode> list = new ArrayList<>();
+                                                          list.add((ParenthesisVariablesNode) var);
+                                                          RESULT = list;:};
+
+PVar ::= ID:id {:RESULT= new ParenthesisVariablesNode(false,new IdentifierNode(id));:}
+     | REF ID:id {:RESULT= new ParenthesisVariablesNode(true,new IdentifierNode(id));:};
+
+OptType ::= COLON Type:t {:RESULT=t;:}
+        | {:RESULT=null;:} /* empty */;
+
+Body ::= LBRAC VarDecls:declarations Statements:statements RBRAC{:RESULT=new BodyOperationNode(declarations, statements);:};
+
+//AGGIUNTA DEL NUOVO ELEMENTO IN TESTA E NON IN CODA
+Statements ::= Stat:statement Statements:list{:list.add(0,(StatementOperationNode) statement); RESULT = list;:}
+            | {: ArrayList<StatementOperationNode> list = new ArrayList<>();
+                                                  RESULT = list;:};/* empty */
+
+Stat ::= Vars:vars_list IN SEMI {:RESULT = new ReadOperationNode(vars_list);:}
+    | Exprs:expression_list OUT SEMI {:RESULT = new WriteOperationNode(expression_list,false);:}
+    | Exprs:expression_list OUTNL SEMI {:RESULT = new WriteOperationNode(expression_list,true); :}
+    | Vars:vars_list ASSIGN Exprs:expression_list SEMI {:RESULT = new AssignOperationNode(vars_list,expression_list);:}
+    | FunCall:function_call SEMI {:RESULT= function_call;:}
+    | IF LPAR Expr:expression RPAR THEN Body:ifBody ELSE Body:elseBody {:RESULT= new IfThenElseOperationNode(expression,ifBody,elseBody);:}
+    | IF LPAR Expr:expression RPAR THEN Body:ifBody{:RESULT= new IfThenOperationNode(expression,ifBody);:}
+    | WHILE LPAR Expr:expression RPAR DO Body:whileBody {:RESULT= new WhileOperationNode(expression,whileBody);:}
+    | RETURN Expr:e SEMI{:RESULT= new ReturnStatementNode(e);:};
+
+Vars ::= ID:attrib PIPE Vars:list {: list.add(new IdentifierNode(attrib));
+                                     RESULT = list;
+                                  :}
+     | ID:attrib {: ArrayList<IdentifierNode> list = new ArrayList<>();
+                    list.add(new IdentifierNode(attrib));
+                    RESULT = list;
+                 :}
+     ;
+
+Exprs ::= Expr:attrib COMMA Exprs:list {: list.add((ExpressionOperationNode) attrib);
+                                          RESULT = list;
+                                       :}
+      | Expr:attrib {: ArrayList<ExpressionOperationNode> list = new ArrayList<>();
+                       list.add((ExpressionOperationNode) attrib);
+                       RESULT = list;
+                    :}
+      ;
+
+FunCall ::= ID:attrib LPAR Exprs:ref RPAR {: RESULT = new FunCallNode(new IdentifierNode(attrib), ref);:}
+        | ID:attrib LPAR RPAR {: RESULT = new FunCallNode(new IdentifierNode(attrib)); :}
+        ;
+
+
+
+
+    Expr ::= Expr:e1 PLUS Expr:e2       {:RESULT = new BinaryOperationNode(e1,"PLUS",e2);:}
+              | Expr:e1 MINUS Expr:e2       {:RESULT = new BinaryOperationNode(e1,"MINUS",e2);:}
+              | Expr:e1 TIMES Expr:e2       {:RESULT = new BinaryOperationNode(e1,"TIMES",e2);:}
+              | Expr:e1 DIV Expr:e2       {:RESULT = new BinaryOperationNode(e1,"DIV",e2);:}
+              | Expr:e1 AND Expr:e2 {: RESULT = new BinaryOperationNode(e1,"AND",e2); :}
+              | Expr:e1 OR Expr:e2 {: RESULT = new BinaryOperationNode(e1,"OR",e2); :}
+              | Expr:e1 GT Expr:e2   {: RESULT = new BinaryOperationNode(e1,"GT",e2);  :}
+              | Expr:e1 GE Expr:e2   {: RESULT = new BinaryOperationNode(e1,"GE",e2);  :}
+              | Expr:e1 LT Expr:e2   {: RESULT = new BinaryOperationNode(e1,"LT",e2);  :}
+              | Expr:e1 LE Expr:e2   {: RESULT = new BinaryOperationNode(e1,"LE",e2);  :}
+              | Expr:e1 EQ Expr:e2   {: RESULT = new BinaryOperationNode(e1,"EQ",e2);  :}
+              | Expr:e1 NE Expr:e2   {: RESULT = new BinaryOperationNode(e1,"NE",e2);  :}
+              | LPAR Expr:e1 RPAR   {: RESULT = e1;  :}
+              | MINUS Expr:e1 {: RESULT = new UnaryOperationNode("MINUS",e1);  :} %prec UMINUS
+              | NOT Expr:e1   {: RESULT = new UnaryOperationNode("NOT",e1);  :}
+              | ID:id         {: RESULT = new IdentifierNode(id);:}
+              // Funcall utilizzate nelle espressione
+              | FunCall:e1  {:RESULT= e1;:}
+              | Constant:e1 {:RESULT= e1;:};
+
+

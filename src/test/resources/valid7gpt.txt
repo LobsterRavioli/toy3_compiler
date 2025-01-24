@@ -1,0 +1,61 @@
+
+
+
+
+// Modulo per testare edge cases
+program
+
+
+// Dichiarazione variabili globali
+
+
+
+c: 1;
+a | b | x : double;
+taglia | ans1 | ans | risultato_atteso | risultato_osservato: string;
+risultato: double;
+def stampa(stringa:string){
+    stringa !>>;
+}
+
+begin
+    stampa("== INIZIO TEST EDGE CASES ==");
+
+    // Test 1: Input minimo
+    test_somma(0, 0, 0, 1, 1, "piccola");
+
+    // Test 2: Valori negativi
+    test_somma(-100, -50.5, 0, 1, -149.5, "piccola");
+
+    // Test 3: Valori grandi
+    test_somma(1000000000, 2000000000.5, 0, 1, 3000000001.5, "grande");
+
+    // Test 4: Soglie di taglia
+    test_somma(25, 25, 0, 1, 51, "media");
+    test_somma(50, 50, 0, 1, 101, "grande");
+    test_somma(24, 24, 0, 1, 49, "piccola");
+
+    // Test 5: Ciclo infinito simulato
+    stampa("Test ciclo infinito simulato. Inserire valori fino a quando 'no' è la risposta.");
+    ans := "si";
+    while (ans == "si") do {
+        "Inserisci un numero intero: ">>;
+        a <<;
+        "Inserisci un reale: ">>;
+        b <<;
+
+        sommac(a, x, b, taglia, risultato);
+
+        stampa("La somma di " + a + " e " + b + " incrementata di " + c + " è " + taglia);
+        stampa("Ed è pari a " + risultato);
+
+        "Vuoi continuare? (si/no): ">>;
+        ans <<;
+    }
+
+    // Test 6: Concatenazioni stringhe
+    stampa("Concatenazione stringhe: La somma di " + 5 + " e " + 10.5 + " incrementata di " + 1 + " è piccola.");
+
+    // Fine dei test
+    stampa("== FINE TEST EDGE CASES ==");
+end

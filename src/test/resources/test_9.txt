@@ -1,0 +1,10 @@
+
+//Test for EndOfLineComment
+
+program
+var=not x: double;
+
+begin
+ a : 'c';
+ end
+                /*Test for Traditional Comment*/

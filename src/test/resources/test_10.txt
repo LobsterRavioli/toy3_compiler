@@ -1,0 +1,12 @@
+
+program
+//Tests ArithOp and Relop with numbers
+
+begin /* Whitout VarDecls */
+
+    /*Random comment*/
+
+            5 <> 67*3457 >>;
+            -6 !>>;
+                    34562.342 or 4 >>;
+            end

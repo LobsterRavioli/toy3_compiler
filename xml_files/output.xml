@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Program>
+    
+    <VariableDeclarationOperationNode>
+        <IntegerConstNode value="1">
+</IntegerConstNode>
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="c">
+</IdentifierNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+    </VariableDeclarationOperationNode>
+    
+    <VariableDeclarationOperationNode Type="DOUBLE">
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="x">
+</IdentifierNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="b">
+</IdentifierNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="a">
+</IdentifierNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+    </VariableDeclarationOperationNode>
+    
+    <VariableDeclarationOperationNode Type="STRING">
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="ans">
+</IdentifierNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="ans1">
+</IdentifierNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="taglia">
+</IdentifierNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+    </VariableDeclarationOperationNode>
+    
+    <VariableDeclarationOperationNode Type="DOUBLE">
+        
+        <VariableOptionalInitializerNodeOperator>
+            
+            <IdentifierNode Type="risultato">
+</IdentifierNode>
+            
+        </VariableOptionalInitializerNodeOperator>
+        
+    </VariableDeclarationOperationNode>
+    
+    <DefDeclarationNode Type="NULL">
+        
+        <IdentifierNode Type="sommac">
+</IdentifierNode>
+        
+        <ParenthesisDeclarationOperationNode Type="DOUBLE">
+            
+            <ParenthesisVariablesNode ref="true">
+                
+                <IdentifierNode Type="result">
+</IdentifierNode>
+                
+            </ParenthesisVariablesNode>
+            
+        </ParenthesisDeclarationOperationNode>
+        
+        <ParenthesisDeclarationOperationNode Type="STRING">
+            
+            <ParenthesisVariablesNode ref="true">
+                
+                <IdentifierNode Type="size">
+</IdentifierNode>
+                
+            </ParenthesisVariablesNode>
+            
+        </ParenthesisDeclarationOperationNode>
+        
+        <ParenthesisDeclarationOperationNode Type="DOUBLE">
+            
+            <ParenthesisVariablesNode ref="false">
+                
+                <IdentifierNode Type="b">
+</IdentifierNode>
+                
+            </ParenthesisVariablesNode>
+            
+        </ParenthesisDeclarationOperationNode>
+        
+        <ParenthesisDeclarationOperationNode Type="INTEGER">
+            
+            <ParenthesisVariablesNode ref="false">
+                
+                <IdentifierNode Type="d">
+</IdentifierNode>
+                
+            </ParenthesisVariablesNode>
+            
+        </ParenthesisDeclarationOperationNode>
+        
+        <ParenthesisDeclarationOperationNode Type="INTEGER">
+            
+            <ParenthesisVariablesNode ref="false">
+                
+                <IdentifierNode Type="a">
+</IdentifierNode>
+                
+            </ParenthesisVariablesNode>
+            
+        </ParenthesisDeclarationOperationNode>
+        
+        <BodyOperationNode>
+            Type="
+            <AssignOperationNode>
+                <IdentifierNode Type="result">
+</IdentifierNode>
+                
+                <BinaryOperationNode Operation="PLUS">
+                    
+                    <IdentifierNode Type="a">
+</IdentifierNode>
+                    
+                    <BinaryOperationNode Operation="PLUS">
+                        
+                        <IdentifierNode Type="b">
+</IdentifierNode>
+                        
+                        <BinaryOperationNode Operation="PLUS">
+                            
+                            <IdentifierNode Type="c">
+</IdentifierNode>
+                            
+                            <IdentifierNode Type="d">
+</IdentifierNode>
+                            
+                        </BinaryOperationNode>
+                        
+                    </BinaryOperationNode>
+                    
+                </BinaryOperationNode>
+                
+            </AssignOperationNode>
+            
+            <IfThenElseOperationNode>
+                
+                <BinaryOperationNode Operation="GT">
+                    
+                    <IdentifierNode Type="result">
+</IdentifierNode>
+                    
+                    <IntegerConstNode value="100">
+</IntegerConstNode>
+                    
+                </BinaryOperationNode>
+                
+                <BodyOperationNode>
+                    Type="
+                    <AssignOperationNode>
+                        <IdentifierNode Type="size">
+</IdentifierNode>
+                        
+                        <StringConstantNode value="grande">
+</StringConstantNode>
+                        
+                    </AssignOperationNode>
+                    
+                </BodyOperationNode>
+                
+                <BodyOperationNode>
+                    Type="
+                    <IfThenElseOperationNode>
+                        
+                        <BinaryOperationNode Operation="GT">
+                            
+                            <IdentifierNode Type="result">
+</IdentifierNode>
+                            
+                            <IntegerConstNode value="50">
+</IntegerConstNode>
+                            
+                        </BinaryOperationNode>
+                        
+                        <BodyOperationNode>
+                            Type="
+                            <AssignOperationNode>
+                                <IdentifierNode Type="size">
+</IdentifierNode>
+                                
+                                <StringConstantNode value="media">
+</StringConstantNode>
+                                
+                            </AssignOperationNode>
+                            
+                        </BodyOperationNode>
+                        
+                        <BodyOperationNode>
+                            Type="
+                            <AssignOperationNode>
+                                <IdentifierNode Type="size">
+</IdentifierNode>
+                                
+                                <StringConstantNode value="piccola">
+</StringConstantNode>
+                                
+                            </AssignOperationNode>
+                            
+                        </BodyOperationNode>
+                        
+                    </IfThenElseOperationNode>
+                    
+                </BodyOperationNode>
+                
+            </IfThenElseOperationNode>
+            
+        </BodyOperationNode>
+        
+    </DefDeclarationNode>
+    
+    <DefDeclarationNode Type="STRING">
+        
+        <IdentifierNode Type="stampa">
+</IdentifierNode>
+        
+        <ParenthesisDeclarationOperationNode Type="STRING">
+            
+            <ParenthesisVariablesNode ref="false">
+                
+                <IdentifierNode Type="messaggio">
+</IdentifierNode>
+                
+            </ParenthesisVariablesNode>
+            
+        </ParenthesisDeclarationOperationNode>
+        
+        <BodyOperationNode>
+            Type="
+            <VariableDeclarationOperationNode>
+                <IntegerConstNode value="0">
+</IntegerConstNode>
+                
+                <VariableOptionalInitializerNodeOperator>
+                    
+                    <IdentifierNode Type="i">
+</IdentifierNode>
+                    
+                </VariableOptionalInitializerNodeOperator>
+                
+            </VariableDeclarationOperationNode>
+            
+            <WhileOperationNode>
+                
+                <BinaryOperationNode Operation="LT">
+                    
+                    <IdentifierNode Type="i">
+</IdentifierNode>
+                    
+                    <IntegerConstNode value="4">
+</IntegerConstNode>
+                    
+                </BinaryOperationNode>
+                
+                <BodyOperationNode>
+                    Type="
+                    <WriteOperationNode Type="true">
+                        
+                        <StringConstantNode value="">
+</StringConstantNode>
+                        
+                    </WriteOperationNode>
+                    
+                    <AssignOperationNode>
+                        <IdentifierNode Type="i">
+</IdentifierNode>
+                        
+                        <BinaryOperationNode Operation="PLUS">
+                            
+                            <IdentifierNode Type="i">
+</IdentifierNode>
+                            
+                            <IntegerConstNode value="1">
+</IntegerConstNode>
+                            
+                        </BinaryOperationNode>
+                        
+                    </AssignOperationNode>
+                    
+                </BodyOperationNode>
+                
+            </WhileOperationNode>
+            
+            <WriteOperationNode Type="true">
+                
+                <IdentifierNode Type="messaggio">
+</IdentifierNode>
+                
+            </WriteOperationNode>
+            
+            <ReturnStatementNode>
+                <StringConstantNode value="ok">
+</StringConstantNode>
+                
+            </ReturnStatementNode>
+        </BodyOperationNode>
+        
+    </DefDeclarationNode>
+    
+    <AssignOperationNode>
+        <IdentifierNode Type="a">
+</IdentifierNode>
+        
+        <IntegerConstNode value="1">
+</IntegerConstNode>
+        
+    </AssignOperationNode>
+    
+    <AssignOperationNode>
+        <IdentifierNode Type="b">
+</IdentifierNode>
+        
+        <DoubleConstNode value="2.2">
+</DoubleConstNode>
+        
+    </AssignOperationNode>
+    
+    <AssignOperationNode>
+        <IdentifierNode Type="x">
+</IdentifierNode>
+        
+        <IntegerConstNode value="3">
+</IntegerConstNode>
+        
+    </AssignOperationNode>
+    
+    <AssignOperationNode>
+        <IdentifierNode Type="risultato">
+</IdentifierNode>
+        
+        <DoubleConstNode value="0.0">
+</DoubleConstNode>
+        
+    </AssignOperationNode>
+    
+    <AssignOperationNode>
+        <IdentifierNode Type="ans">
+</IdentifierNode>
+        
+        <StringConstantNode value="no">
+</StringConstantNode>
+        
+    </AssignOperationNode>
+    
+    <FunCallNode>
+        
+        <IdentifierNode Type="sommac">
+</IdentifierNode>
+        
+        <IdentifierNode Type="risultato">
+</IdentifierNode>
+        
+        <IdentifierNode Type="taglia">
+</IdentifierNode>
+        
+        <IdentifierNode Type="b">
+</IdentifierNode>
+        
+        <IdentifierNode Type="x">
+</IdentifierNode>
+        
+        <IdentifierNode Type="a">
+</IdentifierNode>
+        
+    </FunCallNode>
+    
+    <FunCallNode>
+        
+        <IdentifierNode Type="stampa">
+</IdentifierNode>
+        
+        <BinaryOperationNode Operation="PLUS">
+            
+            <StringConstantNode value="La somma di ">
+</StringConstantNode>
+            
+            <BinaryOperationNode Operation="PLUS">
+                
+                <IdentifierNode Type="a">
+</IdentifierNode>
+                
+                <BinaryOperationNode Operation="PLUS">
+                    
+                    <StringConstantNode value=" e ">
+</StringConstantNode>
+                    
+                    <BinaryOperationNode Operation="PLUS">
+                        
+                        <IdentifierNode Type="b">
+</IdentifierNode>
+                        
+                        <BinaryOperationNode Operation="PLUS">
+                            
+                            <StringConstantNode value=" incrementata di ">
+</StringConstantNode>
+                            
+                            <BinaryOperationNode Operation="PLUS">
+                                
+                                <IdentifierNode Type="c">
+</IdentifierNode>
+                                
+                                <BinaryOperationNode Operation="PLUS">
+                                    
+                                    <StringConstantNode value=" è ">
+</StringConstantNode>
+                                    
+                                    <IdentifierNode Type="taglia">
+</IdentifierNode>
+                                    
+                                </BinaryOperationNode>
+                                
+                            </BinaryOperationNode>
+                            
+                        </BinaryOperationNode>
+                        
+                    </BinaryOperationNode>
+                    
+                </BinaryOperationNode>
+                
+            </BinaryOperationNode>
+            
+        </BinaryOperationNode>
+        
+    </FunCallNode>
+    
+    <FunCallNode>
+        
+        <IdentifierNode Type="stampa">
+</IdentifierNode>
+        
+        <BinaryOperationNode Operation="PLUS">
+            
+            <StringConstantNode value="Ed è pari a ">
+</StringConstantNode>
+            
+            <IdentifierNode Type="risultato">
+</IdentifierNode>
+            
+        </BinaryOperationNode>
+        
+    </FunCallNode>
+    
+    <WriteOperationNode Type="false">
+        
+        <StringConstantNode value="Vuoi continuare? (si/no) - inserisci due volte la risposta ">
+</StringConstantNode>
+        
+    </WriteOperationNode>
+    
+    <ReadOperationNode>
+        <IdentifierNode Type="ans">
+</IdentifierNode>
+        
+    </ReadOperationNode>
+    
+    <ReadOperationNode>
+        <IdentifierNode Type="ans1">
+</IdentifierNode>
+        
+    </ReadOperationNode>
+    
+    <WhileOperationNode>
+        
+        <BinaryOperationNode Operation="EQ">
+            
+            <IdentifierNode Type="ans">
+</IdentifierNode>
+            
+            <StringConstantNode value="si">
+</StringConstantNode>
+            
+        </BinaryOperationNode>
+        
+        <BodyOperationNode>
+            Type="
+            <WriteOperationNode Type="false">
+                
+                <StringConstantNode value="Inserisci un intero: ">
+</StringConstantNode>
+                
+            </WriteOperationNode>
+            
+            <ReadOperationNode>
+                <IdentifierNode Type="a">
+</IdentifierNode>
+                
+            </ReadOperationNode>
+            
+            <WriteOperationNode Type="false">
+                
+                <StringConstantNode value="Inserisci un reale: ">
+</StringConstantNode>
+                
+            </WriteOperationNode>
+            
+            <ReadOperationNode>
+                <IdentifierNode Type="b">
+</IdentifierNode>
+                
+            </ReadOperationNode>
+            
+            <ReadOperationNode>
+                <IdentifierNode Type="b">
+</IdentifierNode>
+                
+            </ReadOperationNode>
+            
+            <FunCallNode>
+                
+                <IdentifierNode Type="sommac">
+</IdentifierNode>
+                
+                <IdentifierNode Type="risultato">
+</IdentifierNode>
+                
+                <IdentifierNode Type="taglia">
+</IdentifierNode>
+                
+                <IdentifierNode Type="b">
+</IdentifierNode>
+                
+                <IdentifierNode Type="x">
+</IdentifierNode>
+                
+                <IdentifierNode Type="a">
+</IdentifierNode>
+                
+            </FunCallNode>
+            
+            <FunCallNode>
+                
+                <IdentifierNode Type="stampa">
+</IdentifierNode>
+                
+                <BinaryOperationNode Operation="PLUS">
+                    
+                    <StringConstantNode value="La somma di ">
+</StringConstantNode>
+                    
+                    <BinaryOperationNode Operation="PLUS">
+                        
+                        <IdentifierNode Type="a">
+</IdentifierNode>
+                        
+                        <BinaryOperationNode Operation="PLUS">
+                            
+                            <StringConstantNode value=" e ">
+</StringConstantNode>
+                            
+                            <BinaryOperationNode Operation="PLUS">
+                                
+                                <IdentifierNode Type="b">
+</IdentifierNode>
+                                
+                                <BinaryOperationNode Operation="PLUS">
+                                    
+                                    <StringConstantNode value=" incrementata di ">
+</StringConstantNode>
+                                    
+                                    <BinaryOperationNode Operation="PLUS">
+                                        
+                                        <IdentifierNode Type="c">
+</IdentifierNode>
+                                        
+                                        <BinaryOperationNode Operation="PLUS">
+                                            
+                                            <StringConstantNode value=" è ">
+</StringConstantNode>
+                                            
+                                            <IdentifierNode Type="taglia">
+</IdentifierNode>
+                                            
+                                        </BinaryOperationNode>
+                                        
+                                    </BinaryOperationNode>
+                                    
+                                </BinaryOperationNode>
+                                
+                            </BinaryOperationNode>
+                            
+                        </BinaryOperationNode>
+                        
+                    </BinaryOperationNode>
+                    
+                </BinaryOperationNode>
+                
+            </FunCallNode>
+            
+            <FunCallNode>
+                
+                <IdentifierNode Type="stampa">
+</IdentifierNode>
+                
+                <BinaryOperationNode Operation="PLUS">
+                    
+                    <StringConstantNode value="Ed è pari a ">
+</StringConstantNode>
+                    
+                    <IdentifierNode Type="risultato">
+</IdentifierNode>
+                    
+                </BinaryOperationNode>
+                
+            </FunCallNode>
+            
+            <WriteOperationNode Type="false">
+                
+                <StringConstantNode value="Vuoi continuare? (si/no): ">
+</StringConstantNode>
+                
+            </WriteOperationNode>
+            
+            <ReadOperationNode>
+                <IdentifierNode Type="ans">
+</IdentifierNode>
+                
+            </ReadOperationNode>
+            
+        </BodyOperationNode>
+        
+    </WhileOperationNode>
+    
+    <WriteOperationNode Type="true">
+        
+        <StringConstantNode value="">
+</StringConstantNode>
+        
+    </WriteOperationNode>
+    
+    <WriteOperationNode Type="true">
+        
+        <StringConstantNode value="Ciao">
+</StringConstantNode>
+        
+    </WriteOperationNode>
+    
+</Program>

@@ -1,0 +1,55 @@
+
+
+
+
+La somma di 1.000000 e 2.200000 incrementata di 1 è piccola
+
+
+
+
+Ed è pari a 7.200000
+Vuoi continuare? (si/no) - inserisci due volte la risposta
+si
+si
+Inserisci un intero: 12
+Inserisci un reale: 2.0
+
+
+
+
+La somma di 12.000000 e 2.000000 incrementata di 1 è piccola
+
+
+
+
+Ed è pari a 18.000000
+Vuoi continuare? (si/no): si
+Inserisci un intero: 24
+Inserisci un reale: 44.3
+
+
+
+
+La somma di 24.000000 e 44.299999 incrementata di 1 è media
+
+
+
+
+Ed è pari a 72.300003
+Vuoi continuare? (si/no): si
+Inserisci un intero: 1000
+Inserisci un reale: 1234.2
+
+
+
+
+La somma di 1000.000000 e 1234.199951 incrementata di 1 è grande
+
+
+
+
+Ed è pari a 2238.199951
+Vuoi continuare? (si/no): no
+
+Ciao
+

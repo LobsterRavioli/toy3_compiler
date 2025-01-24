@@ -1,0 +1,6 @@
+program
+
+    Test  | assignement  = "hello" | variable = 5*1324.347 : string ;
+
+test : 5 ; varChar : "s";
+    begin end

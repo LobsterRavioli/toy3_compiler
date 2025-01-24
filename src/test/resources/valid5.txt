@@ -1,0 +1,100 @@
+/* Esempio base del linguaggio Toy3 */
+
+program
+
+numero_intero:int;
+numero_double:double;
+valore_booleano: bool;
+stringa: string;
+carattere: char;
+
+def assegnazioni_multiple(numero_intero:int; numero_double:double; valore_booleano:bool; stringa:string; carattere:char){
+    numero_intero | numero_double | valore_booleano | stringa | carattere := 1, 2, true, "ciao", 'c';
+    if(valore_booleano)then{
+        "Inserisci un numero intero e te lo stampo:\n">>;
+        numero_intero <<;
+        numero_intero !>>;
+
+        "Inserisci un double e te lo stampo:\n">>;
+        numero_double <<;
+        numero_double !>>;
+
+        "Inserisci un valore booleano e te lo stampo:\n">>;
+        valore_booleano <<;
+        valore_booleano !>>;
+
+        "Inserisci una stringa e te lo stampo:\n">>;
+        stringa <<;
+        stringa !>>;
+
+        "Inserisci un carattere e te lo stampo:\n">>;
+        carattere <<;
+        carattere !>>;
+
+    }
+}
+
+def testing_operation(){
+    n1:double;
+    n2:int;
+    number1 | number2 : int;
+
+    str : string;
+    str := "ciao" + 1;
+
+    while(n1 * n2 <> 0) do {
+        "Inserisci n1:" !>>;
+        n1  <<;
+        "Inserisci n2:" !>>;
+        n2  <<;
+
+
+        "Addizione: " + (n1 + n2) !>>;
+        "Sottrazione: " + (n1 - n2) !>>;
+        "Moltiplicazione: " + (n1 * n2) !>>;
+        "Divisione: " + (n1 / n2) !>>;
+
+    }
+
+
+    number1:= 1;
+    number2:= 2;
+    "AND (true):" , true and true !>>;
+    "OR (true):" , true or false !>>;
+    "NOT (false):" , not true !>>;
+    ">  0:" , number1 > number2 !>>;
+    ">= 0:" , number1 >= number2 !>>;
+    "<  1:" , number1 < number2 !>>;
+    "<= 1:" , number1 <= number2  !>>;
+    "== 0:" , number1 == number2  !>>;
+    "!= 1:" , number1 <> number2  !>>;
+
+
+
+}
+
+begin
+
+
+numero_tipo_intero_dinamico:1;
+numero_tipo_double_dinamico:2.0;
+boolean_value: true;
+stringa_tipo_dinamico: "ciao ciao ciao ciao ciao";
+char_dinamico: 'z';
+
+numero_intero | numero_double | valore_booleano | stringa | carattere := 1, 2, true, "ciao", 'c';
+assegnazioni_multiple(numero_intero, numero_double, valore_booleano, stringa, carattere);
+
+if(boolean_value and false)then{
+    "ciao bella gente fabri fibra e qui presente"!>>;
+}
+else{
+    char_dinamico := 'e';
+    "sono nell'else, printo char dinamico:", char_dinamico!>>;
+
+}
+
+testing_operation();
+
+end
+

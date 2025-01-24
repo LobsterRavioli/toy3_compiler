@@ -1,0 +1,5 @@
+program
+
+begin
+    /*without VarDecls*/ return first * second / (third - fourth + hello ) *fifth ;
+end
