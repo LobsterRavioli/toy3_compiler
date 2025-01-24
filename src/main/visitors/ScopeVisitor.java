@@ -509,6 +509,83 @@ public class ScopeVisitor implements Visitor {
         return null;
     }
 
+    @Override
+    public Object visit(LetOperationNode letOperationNode) {
+        SymbolTable table = new SymbolTable("LetOperationNode");
+        letOperationNode.setTable(table);
+        typeEnvironment.add(table);
+        ArrayList<DeclsOperationNode> decls = letOperationNode.getDeclerations();
+        //iterates on each declaration and adds the element as a row of the scoping table of Program
+        for (DeclsOperationNode decl : decls){
+            String name;
+            String kind;
+            Firm type; //variable used to indicate the firm of the method or the type of the function
+            Type return_type = null;
+            ArrayList<Boolean> hasRefList = new ArrayList<>();
+            ArrayList<Type> inputs_type = new ArrayList<>(); //variable used to temporarily contain the parameters' type of the function
+            if(decl instanceof DefDeclarationNode){
+                name = ((DefDeclarationNode) decl).getId().getName(); //name will be equal to the function name
+                if(((DefDeclarationNode) decl).getType() == null){ //checks if the function has a return type
+                    kind = "procedure";
+                }else {
+                    kind = "function";
+                    return_type = ((DefDeclarationNode) decl).getType();
+                }
+                if(((DefDeclarationNode) decl).getList() == null){ //checks if the function has parameters
+                    inputs_type = null;
+                } else {
+                    for(ParenthesisDeclarationOperationNode par : ((DefDeclarationNode) decl).getList()){ //gets the type of each parameter
+                        for(ParenthesisVariablesNode var: par.getVariables()){
+                            inputs_type.add(par.getType());
+                            hasRefList.add(var.isHasRef());
+                        }
+
+                    }
+                }
+
+
+                type = new FunctionType(inputs_type, return_type,hasRefList);
+
+                SymbolTableRow row = new SymbolTableRow(name, kind, type);
+
+                letOperationNode.getTable().addRow(row);
+
+            } else if (decl instanceof VariableDeclarationOperationNode) {
+                for(VariableOptionalInitializerNodeOperator var : ((VariableDeclarationOperationNode) decl).getVariables()){ //there could be defined multiple variables together
+                    name = var.getId().getName();
+                    kind = "variable";
+
+                    VariableDeclarationOperationNode vardecl = (VariableDeclarationOperationNode)decl;
+
+                    if(vardecl.getType() == null){
+                        if(!checkVardecl(vardecl)) throw new RuntimeException("Incorrect Variable declaration");
+                        type = new VariableFirm(vardecl.getConstant());
+                    }else{
+                        type = new VariableFirm(vardecl.getType());
+                    }
+                    SymbolTableRow row = new SymbolTableRow(name, kind, type);
+                    letOperationNode.getTable().addRow(row);
+                }
+
+            }
+            decl.accept(this);
+        }
+
+
+
+        ArrayList<StatementOperationNode> stats = letOperationNode.getStatements();
+        if(stats != null){
+            for(StatementOperationNode stat : stats){
+                stat.accept(this);
+            }
+        }
+
+
+        System.out.println(letOperationNode.getTable());
+        typeEnvironment.pop();
+        return letOperationNode;
+    }
+
     public boolean checkVardecl(VariableDeclarationOperationNode vars){
 
         int numberOfVars = vars.getVariables().size();

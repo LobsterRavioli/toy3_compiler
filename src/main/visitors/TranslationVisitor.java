@@ -32,6 +32,7 @@ public class TranslationVisitor implements Visitor {
     public TranslationVisitor() {
         return;
     }
+    private String prototypes ="";
 
     @Override
     public String visit(DoubleConstNode doubleConstNode) {
@@ -372,25 +373,38 @@ public class TranslationVisitor implements Visitor {
 
 
         // Aggiunge il main
-        builder.append("int main() {\n");
+
+        String main =  "int main() {\n";
+        String innerDeclarations = "";
         if (programOperationNode.getInnerDeclaration() != null) {
             for (DeclsOperationNode decl : programOperationNode.getInnerDeclaration()) {
                 Node node = (Node) decl;
                 builder.append(node.accept(this)).append("\n");
+                innerDeclarations += node.accept(this) + "\n";
             }
+
         }
+
+
+
+        String statements = "";
         // Gestisce le statements
         if (programOperationNode.getStatements() != null) {
             for (StatementOperationNode statement : programOperationNode.getStatements()) {
-
                 Node node = (Node) statement;
-                builder.append(node.accept(this)).append("\n");
+                statements += node.accept(this) + "\n";
+
                 if(statement instanceof FunCallNode){
-                    builder.append(";").append("\n");
+                    statements += ";\n";
                 }
             }
         }
 
+        System.out.println("sto in program node: " + prototypes);
+        builder.append(prototypes);
+        builder.append(main);
+        builder.append(innerDeclarations);
+        builder.append(statements);
         builder.append("    // Main content here\n"); // Eventuale aggiunta di contenuti
         builder.append("}\n");
 
@@ -415,6 +429,32 @@ public class TranslationVisitor implements Visitor {
     public String visit(ParenthesisVariablesNode parenthesisVariablesNode) {
         StringBuilder builder = new StringBuilder();
         builder.append(parenthesisVariablesNode.getId().accept(this));
+        return builder.toString();
+    }
+
+    @Override
+    public Object visit(LetOperationNode letOperationNode) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("{");
+        for(DeclsOperationNode decl: letOperationNode.getDeclerations()){
+            if(decl instanceof DefDeclarationNode){
+                this.prototypes += (String) createFirm((DefDeclarationNode)decl) + ";\n";
+                System.out.println("Prototipi: " + prototypes);
+            }
+            builder.append(decl.accept(this));
+        }
+
+        for(StatementOperationNode statements: letOperationNode.getStatements()){
+            builder.append(statements.accept(this));
+            if(statements instanceof FunCallNode){
+                builder.append(";").append("\n");
+            }
+
+        }
+
+        builder.append("}");
+
         return builder.toString();
     }
 

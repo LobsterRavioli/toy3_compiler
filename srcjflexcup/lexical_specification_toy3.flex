@@ -65,6 +65,8 @@ CharC = '[^\\[ntbrf\\\'\"]]' | {EscChar}
 <YYINITIAL> "if" { return symbol(sym.IF); }
 <YYINITIAL> "then" { return symbol(sym.THEN); }
 <YYINITIAL> "else" { return symbol(sym.ELSE); }
+<YYINITIAL> "let" { return symbol(sym.LET_FUN); }
+<YYINITIAL> "in" { return symbol(sym.IN_FUN); }
 <YYINITIAL> "while" { return symbol(sym.WHILE); }
 <YYINITIAL> "do" { return symbol(sym.DO); }
 <YYINITIAL> "return" { return symbol(sym.RETURN); }

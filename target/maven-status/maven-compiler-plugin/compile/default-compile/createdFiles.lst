@@ -1,4 +1,5 @@
 test/utils/GrammarTestBuilder.class
+main/node/stat/LetOperationNode.class
 main/XmlFormatter.class
 main/node/stat/IfThenElseOperationNode.class
 main/node/defdecl/DefDeclarationNode.class

@@ -544,6 +544,33 @@ public class TypeCheckerVisitor implements Visitor {
         return parenthesisVariablesNode.getId().getType();
     }
 
+    @Override
+    public Object visit(LetOperationNode letOperationNode) {
+        typeEnvironment.add(letOperationNode.getTable());
+
+        if (letOperationNode.getDeclerations() != null){
+            for(DeclsOperationNode decl : letOperationNode.getDeclerations())
+            {
+                decl.accept(this);
+            }
+        }
+
+        if (letOperationNode.getStatements() != null){
+            for(StatementOperationNode stat : letOperationNode.getStatements())
+            {
+                Type type = (Type) stat.accept(this);
+                if(type == null)
+                    throw new RuntimeException("Statement not valid: " + stat);
+
+            }
+        }
+        letOperationNode.setType(Type.NOTYPE);
+
+        typeEnvironment.pop();
+
+        return letOperationNode.getType();
+    }
+
     public Stack<SymbolTable> cloneTypeEnvironment(Stack<SymbolTable> typeEnvironment){
         Stack<SymbolTable> clonedStack = new Stack<SymbolTable>();
         for(SymbolTable currSymbolTable: typeEnvironment){

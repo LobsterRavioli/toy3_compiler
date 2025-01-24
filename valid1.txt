@@ -44,6 +44,27 @@ begin
     risultato := 0.0;
     ans := "no";
 
+    let
+        testo_magico: int;
+        def funzione_magica (ref testo_di_saluto: string) {
+            "ciao" !>>;
+        }
+        def funzione_magica_che_stampa () {
+        i : 0;
+            while ( i < 2) do {
+            "sono la seconda funzione magica" !>>;
+            i:=i+1;
+            }
+        }
+    in
+        "Dammi un valore e te lo stampo"!>>;
+        testo_magico <<;
+        funzione_magica_che_stampa ();
+        "Il valore è" + testo_magico !>>;
+    end let;
+
+    funzione_magica_che_stampa();
+
     sommac(a, x, b, taglia, risultato);
 
     stampa("La somma di " + a + " e " + b + " incrementata di " + c + " è " + taglia);
