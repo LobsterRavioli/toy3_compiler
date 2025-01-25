@@ -458,6 +458,17 @@ public class TranslationVisitor implements Visitor {
         return builder.toString();
     }
 
+    @Override
+    public Object visit(WhileElseLoopNode whileElseLoopNode) {
+        StringBuilder builder = new StringBuilder();
+        String condition = (String) whileElseLoopNode.getExpression().accept(this);
+        String whileBody = (String) whileElseLoopNode.getWhileBody().accept(this);
+        String elseloopBody = (String) whileElseLoopNode.getElseLoopBody().accept(this);
+        builder.append("while(" + condition + ")\n" + whileBody + "\n" );
+        builder.append("while(" + "!(" + condition + ")" + ")\n" + elseloopBody + "\n" );
+        return builder.toString();
+    }
+
     private String getCType(Type t){
 
         if (t == null){

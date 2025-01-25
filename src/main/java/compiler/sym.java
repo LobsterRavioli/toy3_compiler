@@ -8,59 +8,60 @@ package main.java.compiler;
 /** CUP generated interface containing symbol constants. */
 public interface sym {
   /* terminals */
-  public static final int CHAR_CONST = 24;
-  public static final int ASSIGNDECL = 49;
-  public static final int CHAR = 16;
-  public static final int GE = 35;
-  public static final int UMINUS = 30;
+  public static final int CHAR_CONST = 25;
+  public static final int ASSIGNDECL = 50;
+  public static final int CHAR = 17;
+  public static final int GE = 36;
+  public static final int UMINUS = 31;
   public static final int LET_FUN = 5;
-  public static final int DOUBLE_CONST = 23;
-  public static final int DOUBLE = 14;
-  public static final int SEMI = 46;
-  public static final int INT = 12;
-  public static final int OUT = 52;
-  public static final int RBRAC = 43;
-  public static final int MINUS = 27;
-  public static final int REF = 10;
-  public static final int OUTNL = 53;
-  public static final int NOT = 33;
-  public static final int AND = 31;
-  public static final int LT = 36;
-  public static final int RPAR = 41;
-  public static final int IN = 51;
-  public static final int OR = 32;
-  public static final int COMMA = 45;
-  public static final int BOOL = 13;
-  public static final int DIV = 29;
-  public static final int BEGIN = 18;
-  public static final int PLUS = 26;
-  public static final int ASSIGN = 47;
+  public static final int DOUBLE_CONST = 24;
+  public static final int DOUBLE = 15;
+  public static final int SEMI = 47;
+  public static final int INT = 13;
+  public static final int OUT = 53;
+  public static final int RBRAC = 44;
+  public static final int MINUS = 28;
+  public static final int REF = 11;
+  public static final int OUTNL = 54;
+  public static final int NOT = 34;
+  public static final int AND = 32;
+  public static final int LT = 37;
+  public static final int RPAR = 42;
+  public static final int IN = 52;
+  public static final int OR = 33;
+  public static final int COMMA = 46;
+  public static final int BOOL = 14;
+  public static final int DIV = 30;
+  public static final int BEGIN = 19;
+  public static final int PLUS = 27;
+  public static final int ASSIGN = 48;
   public static final int IF = 2;
-  public static final int ID = 50;
-  public static final int LE = 37;
+  public static final int ID = 51;
+  public static final int LE = 38;
   public static final int EOF = 0;
-  public static final int RETURN = 9;
-  public static final int INT_CONST = 22;
-  public static final int TRUE = 20;
+  public static final int RETURN = 10;
+  public static final int INT_CONST = 23;
+  public static final int TRUE = 21;
   public static final int error = 1;
-  public static final int PROGRAM = 17;
-  public static final int PIPE = 44;
-  public static final int EQ = 38;
+  public static final int PROGRAM = 18;
+  public static final int PIPE = 45;
+  public static final int EQ = 39;
   public static final int IN_FUN = 6;
-  public static final int TIMES = 28;
-  public static final int COLON = 48;
+  public static final int TIMES = 29;
+  public static final int COLON = 49;
   public static final int ELSE = 4;
   public static final int WHILE = 7;
   public static final int THEN = 3;
-  public static final int NE = 39;
-  public static final int END = 19;
-  public static final int LPAR = 40;
-  public static final int STRING = 15;
-  public static final int DEF = 11;
-  public static final int LBRAC = 42;
-  public static final int FALSE = 21;
-  public static final int STRING_CONST = 25;
-  public static final int GT = 34;
+  public static final int NE = 40;
+  public static final int END = 20;
+  public static final int LPAR = 41;
+  public static final int STRING = 16;
+  public static final int DEF = 12;
+  public static final int LBRAC = 43;
+  public static final int FALSE = 22;
+  public static final int STRING_CONST = 26;
+  public static final int GT = 35;
+  public static final int ELSELOOP = 9;
   public static final int DO = 8;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -72,6 +73,7 @@ public interface sym {
   "IN_FUN",
   "WHILE",
   "DO",
+  "ELSELOOP",
   "RETURN",
   "REF",
   "DEF",

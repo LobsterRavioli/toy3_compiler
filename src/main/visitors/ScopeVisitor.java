@@ -586,6 +586,24 @@ public class ScopeVisitor implements Visitor {
         return letOperationNode;
     }
 
+    @Override
+    public Object visit(WhileElseLoopNode whileElseLoopNode) {
+        SymbolTable whileLoopTable = new SymbolTable("WHILE-LOOP");
+        SymbolTable elseLoopTable = new SymbolTable("ELSE-LOOP");
+
+        typeEnvironment.add(whileLoopTable);
+        whileElseLoopNode.getExpression().accept(this);
+        whileElseLoopNode.getWhileBody().accept(this);
+        typeEnvironment.pop();
+        typeEnvironment.add(elseLoopTable);
+        whileElseLoopNode.getElseLoopBody().accept(this);
+        typeEnvironment.pop();
+        whileElseLoopNode.setWhiletable(whileLoopTable);
+        whileElseLoopNode.setElseTable(elseLoopTable);
+
+        return null;
+    }
+
     public boolean checkVardecl(VariableDeclarationOperationNode vars){
 
         int numberOfVars = vars.getVariables().size();

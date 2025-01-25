@@ -44,6 +44,7 @@ main/node/stat/IfThenOperationNode.class
 main/node/StatOp.class
 main/node/expr/constants/CharConstantNode.class
 main/visitors/utils/FunctionType.class
+main/node/stat/WhileElseLoopNode.class
 main/visitors/utils/SymbolTableRow.class
 main/node/expr/operations/UnaryOperationNode.class
 main/node/pardecl/ParenthesisVariablesNode.class

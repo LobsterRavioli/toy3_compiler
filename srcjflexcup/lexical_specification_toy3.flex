@@ -64,6 +64,7 @@ CharC = '[^\\[ntbrf\\\'\"]]' | {EscChar}
 /** Keywords **/
 <YYINITIAL> "if" { return symbol(sym.IF); }
 <YYINITIAL> "then" { return symbol(sym.THEN); }
+<YYINITIAL> "elseloop" { return symbol(sym.ELSELOOP); }
 <YYINITIAL> "else" { return symbol(sym.ELSE); }
 <YYINITIAL> "let" { return symbol(sym.LET_FUN); }
 <YYINITIAL> "in" { return symbol(sym.IN_FUN); }

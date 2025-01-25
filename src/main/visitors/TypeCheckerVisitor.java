@@ -571,6 +571,39 @@ public class TypeCheckerVisitor implements Visitor {
         return letOperationNode.getType();
     }
 
+    @Override
+    public Object visit(WhileElseLoopNode whileElseLoopNode) {
+
+        typeEnvironment.add(whileElseLoopNode.getWhiletable());
+        ExpressionOperationNode expr = whileElseLoopNode.getExpression();
+
+        Type tmpExpr = (Type) expr.accept(this);
+        if(tmpExpr != Type.BOOLEAN){
+            throw new RuntimeException("The while expression is not boolean");
+        }
+
+        BodyOperationNode whileBody = whileElseLoopNode.getWhileBody();
+        whileBody.accept(this);
+
+        if(whileBody.getType() != Type.NOTYPE){
+            throw new RuntimeException("The while body is not NOTYPE");
+
+        }
+
+        BodyOperationNode elseBody = whileElseLoopNode.getElseLoopBody();
+        elseBody.accept(this);
+
+        if(elseBody.getType() != Type.NOTYPE){
+            throw new RuntimeException("The while body is not NOTYPE");
+
+        }
+
+        whileElseLoopNode.setType(Type.NOTYPE);
+        typeEnvironment.pop();
+
+        return whileElseLoopNode.getType();
+    }
+
     public Stack<SymbolTable> cloneTypeEnvironment(Stack<SymbolTable> typeEnvironment){
         Stack<SymbolTable> clonedStack = new Stack<SymbolTable>();
         for(SymbolTable currSymbolTable: typeEnvironment){

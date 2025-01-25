@@ -48,4 +48,6 @@ public interface Visitor{
     Object visit(ParenthesisVariablesNode parenthesisVariablesNode);
 
     Object visit(LetOperationNode letOperationNode);
+
+    Object visit(WhileElseLoopNode whileElseLoopNode);
 }

@@ -5,6 +5,7 @@ program
 // Dichiarazione variabili globali
 c: 1;
 a | b | x : double;
+i : int;
 taglia | ans1 | ans : string;
 risultato: double;
 
@@ -41,29 +42,9 @@ begin
     a := 1;
     b := 2.2;
     x := 3;
+    i := 1;
     risultato := 0.0;
     ans := "no";
-
-    let
-        testo_magico: int;
-        def funzione_magica (ref testo_di_saluto: string) {
-            "ciao" !>>;
-        }
-        def funzione_magica_che_stampa () {
-        i : 0;
-            while ( i < 2) do {
-            "sono la seconda funzione magica" !>>;
-            i:=i+1;
-            }
-        }
-    in
-        "Dammi un valore e te lo stampo"!>>;
-        testo_magico <<;
-        funzione_magica_che_stampa ();
-        "Il valore è" + testo_magico !>>;
-    end let;
-
-    funzione_magica_che_stampa();
 
     sommac(a, x, b, taglia, risultato);
 
@@ -73,6 +54,14 @@ begin
     "Vuoi continuare? (si/no) - inserisci due volte la risposta\n">>;
     ans <<;
     ans1 <<;
+
+    while (i < 4) do {
+        blu:1;
+        "" !>>; // Ritorno a capo
+        i := i + 1;
+   } elseloop {
+
+    }
 
     while (ans == "si") do {
         "Inserisci un intero: ">>;

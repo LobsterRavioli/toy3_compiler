@@ -63,6 +63,7 @@ char* stampa_fun(char* messaggio);
 
 int c = 1;
 double a,b,x;
+int i;
 char* taglia,*ans1,*ans;
 double risultato;
 void sommac_fun(double a,double d,double b,char* *size,double *result){*result = a + b + c + d;
@@ -75,8 +76,6 @@ char* stampa_fun(char* messaggio){int i = 0;while(i < 4){
 }
 }
 printf("%s\n",messaggio);return "ok";}
-void funzione_magica_fun(char* *testo_di_saluto);
-void funzione_magica_che_stampa_fun();
 int main() {
 a = 1;
 
@@ -84,17 +83,12 @@ b = 2.2;
 
 x = 3;
 
+i = 1;
+
 risultato = 0.0;
 
 ans = "no";
 
-{int testo_magico;void funzione_magica_fun(char* *testo_di_saluto){printf("%s\n","ciao");}void funzione_magica_che_stampa_fun(){int i = 0;while(i < 2){
-{printf("%s\n","sono la seconda funzione magica");i = i + 1;
-}
-}
-}printf("%s\n","Dammi un valore e te lo stampo");scanf("%d", &testo_magico);getchar();printf("%s\n",string_concat("Il valore è", int2str(testo_magico)));}
-funzione_magica_che_stampa_fun()
-;
 sommac_fun(a, x, b, &taglia, &risultato)
 ;
 stampa_fun(string_concat(string_concat(string_concat(string_concat(string_concat(string_concat(string_concat("La somma di ", float2str(a)), " e "), float2str(b)), " incrementata di "), int2str(c)), " è "), taglia))
@@ -114,6 +108,12 @@ ans1= (char*) malloc( (strlen(buffer) + 1) *sizeof(char) );
 strcpy(ans1,buffer);
  free(buffer);
 getchar();
+while(i < 4)
+{int blu = 1;printf("%s\n","");i = i + 1;
+}
+while(!(i < 4))
+{}
+
 while(strcmp( "si", ans) == 0){
 {printf("%s","Inserisci un intero: ");scanf("%lf", &a);getchar();printf("%s","Inserisci un reale: ");scanf("%lf", &b);getchar();sommac_fun(a, x, b, &taglia, &risultato);
 stampa_fun(string_concat(string_concat(string_concat(string_concat(string_concat(string_concat(string_concat("La somma di ", float2str(a)), " e "), float2str(b)), " incrementata di "), int2str(c)), " è "), taglia));

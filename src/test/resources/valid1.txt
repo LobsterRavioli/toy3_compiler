@@ -32,7 +32,11 @@ def stampa(messaggio: string): string
     while (i < 4) do {
         "" !>>; // Ritorno a capo
         i := i + 1;
-    }
+
+   }elseloop{
+
+   }
+
     messaggio !>>;
     return "ok";
 }
