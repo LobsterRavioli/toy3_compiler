@@ -105,6 +105,12 @@ ans1= (char*) malloc( (strlen(buffer) + 1) *sizeof(char) );
 strcpy(ans1,buffer);
  free(buffer);
 getchar();
+for(int i = 3.12;i<=30;i++){buffer = (char*) malloc((1024*5)*sizeof(char) );
+scanf("%[^\n]", buffer);
+ans= (char*) malloc( (strlen(buffer) + 1) *sizeof(char) );
+strcpy(ans,buffer);
+ free(buffer);
+getchar();}
 while(strcmp( "si", ans) == 0){
 {printf("%s","Inserisci un intero: ");scanf("%lf", &a);getchar();printf("%s","Inserisci un reale: ");scanf("%lf", &b);getchar();sommac_fun(a, x, b, &taglia, &risultato);
 stampa_fun(string_concat(string_concat(string_concat(string_concat(string_concat(string_concat(string_concat("La somma di ", float2str(a)), " e "), float2str(b)), " incrementata di "), int2str(c)), " è "), taglia));

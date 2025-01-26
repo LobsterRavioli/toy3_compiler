@@ -46,4 +46,6 @@ public interface Visitor{
     Object visit(VariableOptionalInitializerNodeOperator variableOptionalInitializerNodeOperator);
 
     Object visit(ParenthesisVariablesNode parenthesisVariablesNode);
+
+    Object visit(ForNode forNode);
 }

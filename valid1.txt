@@ -46,12 +46,19 @@ begin
 
     sommac(a, x, b, taglia, risultato);
 
+
     stampa("La somma di " + a + " e " + b + " incrementata di " + c + " è " + taglia);
     stampa("Ed è pari a " + risultato);
 
     "Vuoi continuare? (si/no) - inserisci due volte la risposta\n">>;
     ans <<;
     ans1 <<;
+
+
+    for (i = 3.12 : int; to 30) do {
+    ans <<;
+    }
+
 
     while (ans == "si") do {
         "Inserisci un intero: ">>;

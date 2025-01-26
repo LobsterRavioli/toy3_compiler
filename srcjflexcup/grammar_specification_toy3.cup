@@ -16,7 +16,7 @@ import main.node.expr.operations.*;
 /* Terminals (tokens returned by the scanner). */
 /** Keywords **/
 terminal            IF, THEN, ELSE;
-terminal            WHILE, DO, RETURN;
+terminal            WHILE, DO, RETURN, TO, FOR;
 terminal            REF, DEF;
 terminal            INT, BOOL, DOUBLE, STRING, CHAR;
 terminal            PROGRAM, BEGIN, END;
@@ -159,6 +159,7 @@ Stat ::= Vars:vars_list IN SEMI {:RESULT = new ReadOperationNode(vars_list);:}
     | Exprs:expression_list OUTNL SEMI {:RESULT = new WriteOperationNode(expression_list,true); :}
     | Vars:vars_list ASSIGN Exprs:expression_list SEMI {:RESULT = new AssignOperationNode(vars_list,expression_list);:}
     | FunCall:function_call SEMI {:RESULT= function_call;:}
+    | FOR LPAR VarDecl:decl TO INT_CONST:int_const RPAR DO Body:body {:RESULT= new ForNode(new IntegerConstNode(int_const),body,decl);:}
     | IF LPAR Expr:expression RPAR THEN Body:ifBody ELSE Body:elseBody {:RESULT= new IfThenElseOperationNode(expression,ifBody,elseBody);:}
     | IF LPAR Expr:expression RPAR THEN Body:ifBody{:RESULT= new IfThenOperationNode(expression,ifBody);:}
     | WHILE LPAR Expr:expression RPAR DO Body:whileBody {:RESULT= new WhileOperationNode(expression,whileBody);:}

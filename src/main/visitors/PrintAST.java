@@ -550,5 +550,10 @@ public class PrintAST implements Visitor {
         return null;
     }
 
+    @Override
+    public Object visit(ForNode forNode) {
+        return null;
+    }
+
 
 }

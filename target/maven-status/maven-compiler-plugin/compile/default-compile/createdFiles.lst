@@ -28,6 +28,7 @@ main/Main.class
 main/node/stat/WriteOperationNode.class
 main/node/expr/constants/FalseConstantNode.class
 main/java/compiler/Lexer.class
+main/node/stat/ForNode.class
 main/node/stat/AssignOperationNode.class
 main/visitors/utils/VariableFirm.class
 main/node/expr/operations/FunCallNode.class

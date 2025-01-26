@@ -509,6 +509,19 @@ public class ScopeVisitor implements Visitor {
         return null;
     }
 
+    @Override
+    public Object visit(ForNode forNode) {
+        SymbolTable table = new SymbolTable("FOR");
+
+        forNode.getDecl().accept(this);
+        forNode.getConstant().accept(this);
+        typeEnvironment.add(table);
+        forNode.getBody().accept(this);
+        typeEnvironment.pop();
+        forNode.setTable(table);
+        return null;
+    }
+
     public boolean checkVardecl(VariableDeclarationOperationNode vars){
 
         int numberOfVars = vars.getVariables().size();

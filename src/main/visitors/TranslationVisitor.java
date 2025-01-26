@@ -418,6 +418,23 @@ public class TranslationVisitor implements Visitor {
         return builder.toString();
     }
 
+    @Override
+    public Object visit(ForNode forNode) {
+        StringBuilder builder = new StringBuilder();
+        String declaration = (String) forNode.getDecl().accept(this);
+        String integer = (String) forNode.getConstant().accept(this);
+        String body= (String) forNode.getBody().accept(this);
+        String id = forNode.getDecl().getVariables().get(0).getId().getName();
+        builder.append("for(");
+        builder.append(declaration);
+        builder.append(id).append("<=").append(integer).append(";");
+        builder.append(id).append("++");
+        builder.append(")");
+        builder.append(body);
+
+        return builder.toString();
+    }
+
     private String getCType(Type t){
 
         if (t == null){

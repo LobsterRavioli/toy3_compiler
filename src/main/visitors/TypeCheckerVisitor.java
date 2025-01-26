@@ -544,6 +544,47 @@ public class TypeCheckerVisitor implements Visitor {
         return parenthesisVariablesNode.getId().getType();
     }
 
+    @Override
+    public Object visit(ForNode forNode) {
+
+        typeEnvironment.add(forNode.getTable());
+
+        if(forNode.getDecl().getVariables().size() > 1)
+            throw new RuntimeException("Declaration in the for should be 1");
+
+        System.out.println(forNode.getDecl());
+        Type initializationConstantType;
+        VariableOptionalInitializerNodeOperator varOptInit = forNode.getDecl().getVariables().get(0);
+        if(varOptInit.getExpr() == null) { //if the son hasn't an expression then the father can have a type
+            ExpressionOperationNode constant = forNode.getDecl().getConstant();
+            if(constant != null) {
+                initializationConstantType = Type.getTypeFromExpressionNode(constant);
+            }
+            else {
+                initializationConstantType = forNode.getDecl().getType();
+            }
+            //System.out.println("if" + initializationConstantType);
+        } else {
+            initializationConstantType = forNode.getDecl().getType();
+            //System.out.println("else" + initializationConstantType);
+        }
+
+        if(initializationConstantType != Type.INTEGER) {
+            throw new RuntimeException("The variable" + forNode.getDecl().getVariables().get(0).toString() + "is not initializsed as an INTEGER");
+        }
+
+        BodyOperationNode body = forNode.getBody();
+        body.accept(this);
+
+        if(body.getType() != Type.NOTYPE){
+            throw new RuntimeException("The for body is not NOTYPE");
+        }
+
+        forNode.setType(Type.NOTYPE);
+        typeEnvironment.pop();
+        return forNode.getType();
+    }
+
     public Stack<SymbolTable> cloneTypeEnvironment(Stack<SymbolTable> typeEnvironment){
         Stack<SymbolTable> clonedStack = new Stack<SymbolTable>();
         for(SymbolTable currSymbolTable: typeEnvironment){
