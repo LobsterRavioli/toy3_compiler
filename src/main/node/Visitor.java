@@ -46,4 +46,10 @@ public interface Visitor{
     Object visit(VariableOptionalInitializerNodeOperator variableOptionalInitializerNodeOperator);
 
     Object visit(ParenthesisVariablesNode parenthesisVariablesNode);
+
+    Object visit(MapSum mapSum);
+
+    Object visit(LetGoWhen letGoWhen);
+
+    Object visit(GoWhen goWhen);
 }

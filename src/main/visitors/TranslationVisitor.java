@@ -418,6 +418,66 @@ public class TranslationVisitor implements Visitor {
         return builder.toString();
     }
 
+    @Override
+    public Object visit(MapSum mapSum) {
+        StringBuilder builder = new StringBuilder();
+
+        IdentifierNode id = mapSum.getId();
+        ArrayList<ExpressionOperationNode> exprs1 = mapSum.getExpression1();
+        FunCallNode funCall1 = new FunCallNode(id, exprs1);
+        builder.append(funCall1.accept(this));
+        builder.append(" + ");
+
+        ArrayList<ExpressionOperationNode> exprs2 = mapSum.getExpression2();
+        FunCallNode funCall2 = new FunCallNode(id, exprs2);
+        builder.append(funCall2.accept(this));
+        builder.append(" + ");
+
+        ArrayList<ExpressionOperationNode> exprs3 = mapSum.getExpression3();
+        FunCallNode funCall3 = new FunCallNode(id, exprs3);
+        builder.append(funCall3.accept(this));
+
+        return builder.toString();
+    }
+
+    @Override
+    public Object visit(LetGoWhen letGoWhen) {
+        StringBuilder builder = new StringBuilder();
+        String decls = "";
+        String firstGoWhen = "";
+        String secondGoWhen = "";
+        String statements="";
+
+        builder.append("{");
+        for(DeclsOperationNode decl: letGoWhen.getDecls())
+            decls += decl.accept(this);
+
+        builder.append(decls);
+
+        firstGoWhen = (String) letGoWhen.getFirstGoWhen().accept(this);
+        secondGoWhen = (String)letGoWhen.getSecondGowhen().accept(this);
+
+        builder.append(firstGoWhen).append(secondGoWhen);
+
+        for(StatementOperationNode stat: letGoWhen.getOtherStatements())
+            statements += stat.accept(this) + "\n";
+
+        builder.append(statements);
+        builder.append("}");
+
+        return builder.toString();
+    }
+
+    @Override
+    public Object visit(GoWhen goWhen) {
+        WhileOperationNode whileNode;
+        ExpressionOperationNode condition = goWhen.getWhenCondition();
+        BodyOperationNode whileBody = goWhen.getBody();
+        whileNode = new WhileOperationNode(condition,whileBody);
+
+        return whileNode.accept(this) + "\n";
+    }
+
     private String getCType(Type t){
 
         if (t == null){

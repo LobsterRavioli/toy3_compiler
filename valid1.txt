@@ -4,9 +4,15 @@ program
 
 // Dichiarazione variabili globali
 c: 1;
+ciao : 3;
+
 a | b | x : double;
 taglia | ans1 | ans : string;
 risultato: double;
+
+def myfun(a:int;b:int):int{
+return 1;
+}
 
 // Definizione delle funzioni
 def sommac(a: double; d: double; b: double; ref size: string; ref result: double)
@@ -38,13 +44,17 @@ def stampa(messaggio: string): string
 }
 
 begin
+
     a := 1;
     b := 2.2;
     x := 3;
     risultato := 0.0;
     ans := "no";
 
-    sommac(a, x, b, taglia, risultato);
+dofor (i = 1 : int) {
+"sono nel for" !>>;
+} for (i < 5; i:=i+1);
+
 
     stampa("La somma di " + a + " e " + b + " incrementata di " + c + " è " + taglia);
     stampa("Ed è pari a " + risultato);

@@ -1,8 +1,3 @@
-// Circuit1.flex
-// ../jflex-1.8.2/bin/jflex -d src srcjflexcup/lexical_specification.flex
-// CS2A Language Processing
-//
-// Description of lexer for circuit description language.
 //
 // Ian Stark
 
@@ -59,10 +54,14 @@ EscChar = '\\[ntbrf\\\'\"]' | ''
 CharC = '[^\\[ntbrf\\\'\"]]' | {EscChar}
 
 %state STRING
+%state COMMENT
 %%
 
 /** Keywords **/
 <YYINITIAL> "if" { return symbol(sym.IF); }
+<YYINITIAL> "dofor" { return symbol(sym.DOFOR); }
+<YYINITIAL> "for" { return symbol(sym.FOR); }
+
 <YYINITIAL> "then" { return symbol(sym.THEN); }
 <YYINITIAL> "else" { return symbol(sym.ELSE); }
 <YYINITIAL> "while" { return symbol(sym.WHILE); }
@@ -129,29 +128,35 @@ CharC = '[^\\[ntbrf\\\'\"]]' | {EscChar}
      {Identifier} { return symbol(sym.ID, yytext());}
 
      {WhiteSpace} { /* ignore */ }
+
+      "/*" { yybegin(COMMENT); }
+
      {Comment} { /* ignore */ }
 
 }
 
 <STRING> {
       \" { yybegin(YYINITIAL);
-          if(string.length() == 1) {
-              char result = string.toString().charAt(0);
-              string.setLength(0);
-              return symbol(sym.CHAR_CONST, result);
-          }
-
           String result = string.toString();
           string.setLength(0);
           return symbol(sym.STRING_CONST, result);
       }
-      [^\"]+ { string.append( yytext() ); }
+      [^\"]+ { string.append( yytext() ); } //[^\n\r\"\\]+ { string.append( yytext() ); }
       \\t { string.append('\t'); }
       \\n { string.append('\n'); }
       \\r { string.append('\r'); }
       \\\" { string.append('\"'); }
       \\ { string.append('\\'); }
+      <<EOF>> { throw new IllegalArgumentException("String constant not correctly closed, line: " + yyline + "; column: " +yycolumn); }
 }
+
+<COMMENT> {
+    "*/" { yybegin(YYINITIAL); }
+    {LineTerminator} {}
+    . {}
+    <<EOF>> { throw new Error("Comment not correctly closed, line: " + yyline + "; column: " +yycolumn); }
+}
+
 
 
 [^] { throw new Error("Illegal character <"+yytext()+"> line: " + yyline + "; column: " +yycolumn); }

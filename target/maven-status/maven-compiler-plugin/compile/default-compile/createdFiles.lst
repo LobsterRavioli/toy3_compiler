@@ -15,7 +15,9 @@ main/visitors/ScopeVisitor.class
 main/node/expr/constants/DoubleConstNode.class
 main/visitors/utils/Firm.class
 main/node/expr/constants/IntegerConstNode.class
+main/node/stat/LetGoWhen.class
 main/node/expr/constants/StringConstantNode.class
+main/node/stat/GoWhen.class
 main/node/vardecl/VariableOptionalInitializerNodeOperator.class
 main/node/pardecl/ParenthesisDeclarationOperationNode.class
 main/java/compiler/sym.class
@@ -27,6 +29,7 @@ main/node/stat/ReturnStatementNode.class
 main/Main.class
 main/node/stat/WriteOperationNode.class
 main/node/expr/constants/FalseConstantNode.class
+main/node/stat/MapSum.class
 main/java/compiler/Lexer.class
 main/node/stat/AssignOperationNode.class
 main/visitors/utils/VariableFirm.class

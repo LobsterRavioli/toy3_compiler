@@ -175,6 +175,7 @@ public class TypeCheckerVisitor implements Visitor {
         if(type.getOutputType() != null){
             funCallNode.setType(type.getType());
         }
+
         else {
             funCallNode.setType(Type.NOTYPE);
         }
@@ -183,6 +184,69 @@ public class TypeCheckerVisitor implements Visitor {
 
         return funCallNode.getType();
 
+    }
+
+
+    @Override
+    public Object visit(MapSum mapSum) {
+        Stack<SymbolTable> cloned = (Stack<SymbolTable>) typeEnvironment.clone();
+        FunctionType type = lookUpFunction(mapSum.getId(),cloned);
+        mapSum.setType(type.getType());
+
+        if(type == null){
+            throw new RuntimeException("The function" + mapSum.getId().getName() + " has been not declared");
+        }
+
+        if(!(type.getOutputType() == Type.INTEGER || type.getOutputType() == Type.DOUBLE)){
+            throw new RuntimeException("The function " + mapSum.getId().getName() + " must be integer or double");
+        }
+
+
+        FunCallNode funCallNode1 = new FunCallNode(mapSum.getId(),mapSum.getExpression1());
+        FunCallNode funCallNode2 = new FunCallNode(mapSum.getId(),mapSum.getExpression2());
+        FunCallNode funCallNode3 = new FunCallNode(mapSum.getId(),mapSum.getExpression3());
+
+        
+        funCallNode1.accept(this);
+        funCallNode2.accept(this);
+        funCallNode3.accept(this);
+
+        return mapSum.getType();
+    }
+
+    @Override
+    public Object visit(LetGoWhen letGoWhen) {
+
+        for(VariableDeclarationOperationNode decl : letGoWhen.getDecls()){
+
+            decl.accept(this);
+        }
+
+        letGoWhen.getFirstGoWhen().accept(this);
+        letGoWhen.getSecondGowhen().accept(this);
+
+        for(StatementOperationNode stat: letGoWhen.getOtherStatements()){
+
+            if(stat instanceof VariableDeclarationOperationNode)
+                throw new RuntimeException("LetGoWhen Should not contains declarations");
+            Type type = (Type) stat.accept(this);
+            if(type == null)
+                throw new RuntimeException("Statements not valid.");
+        }
+
+        letGoWhen.setType(Type.NOTYPE);
+
+        return letGoWhen.getType();
+    }
+
+    @Override
+    public Object visit(GoWhen goWhen) {
+        ExpressionOperationNode whileCondition = goWhen.getWhenCondition();
+        BodyOperationNode whileBody = goWhen.getBody();
+        WhileOperationNode finalWhile = new WhileOperationNode(whileCondition,whileBody);
+        finalWhile.setTable(goWhen.getSymbolTable());
+        Type type = (Type)finalWhile.accept(this);
+        return type;
     }
 
     @Override
@@ -544,6 +608,8 @@ public class TypeCheckerVisitor implements Visitor {
         return parenthesisVariablesNode.getId().getType();
     }
 
+
+
     public Stack<SymbolTable> cloneTypeEnvironment(Stack<SymbolTable> typeEnvironment){
         Stack<SymbolTable> clonedStack = new Stack<SymbolTable>();
         for(SymbolTable currSymbolTable: typeEnvironment){
@@ -578,7 +644,6 @@ public class TypeCheckerVisitor implements Visitor {
         Stack<SymbolTable> clonedTypeEnvironment = cloneTypeEnvironment(typeEnvironment);
         if(typeEnvironment != null){
             for(SymbolTable symbolTable: clonedTypeEnvironment){
-
                 if(symbolTable.contains(idNode,"variable")){
                     return symbolTable.getRow(idNode,"variable").getFirm().getType();
                 }

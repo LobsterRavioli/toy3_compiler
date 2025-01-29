@@ -134,6 +134,90 @@ public class ScopeVisitor implements Visitor {
         return null;
     }
 
+
+    @Override
+    public Object visit(MapSum mapSum) {
+        SymbolTable table = typeEnvironment.peek();
+        mapSum.setTable(table);
+
+        mapSum.getId().accept(this);
+        if (mapSum.getExpression1() != null){
+            for(ExpressionOperationNode var : mapSum.getExpression1())
+            {
+                var.accept(this);
+            }
+        }
+
+        if (mapSum.getExpression2() != null){
+            for(ExpressionOperationNode var : mapSum.getExpression2())
+            {
+                var.accept(this);
+            }
+        }
+
+        if (mapSum.getExpression3() != null){
+            for(ExpressionOperationNode var : mapSum.getExpression3())
+            {
+                var.accept(this);
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public Object visit(LetGoWhen letGoWhen) {
+
+
+        SymbolTable table = new SymbolTable("LetGoWhen Table");
+        typeEnvironment.add(table);
+        letGoWhen.setTable(table);
+
+        if (letGoWhen.getDecls() != null){
+            for(VariableDeclarationOperationNode vars : letGoWhen.getDecls())
+            {
+                Firm type = new VariableFirm(vars.getType());
+
+                if(vars.getType() == null) {
+                    if(!checkVardecl(vars)) throw new RuntimeException("Incorrect Variable declaration");
+
+                    type = new VariableFirm(vars.getConstant());
+                }
+
+                for(VariableOptionalInitializerNodeOperator var: vars.getVariables()){
+                    SymbolTableRow row = new SymbolTableRow(var.getId().getName(), "variable", type);
+                    table.addRow(row);
+                }
+
+                vars.accept(this);
+            }
+        }
+
+        letGoWhen.getFirstGoWhen().accept(this);
+
+        letGoWhen.getSecondGowhen().accept(this);
+
+        for(StatementOperationNode stat: letGoWhen.getOtherStatements()){
+            stat.accept(this);
+        }
+
+
+        typeEnvironment.pop();
+        return null;
+    }
+
+    @Override
+    public Object visit(GoWhen goWhen) {
+        SymbolTable table = typeEnvironment.peek();
+        goWhen.setSymbolTable(table);
+        ExpressionOperationNode whileCondition = goWhen.getWhenCondition();
+        BodyOperationNode whileBody = goWhen.getBody();
+        WhileOperationNode finalWhile = new WhileOperationNode(whileCondition,whileBody);
+        finalWhile.accept(this);
+        return null;
+    }
+
+
     @Override
     public Object visit(ReadOperationNode readOperationNode) {
         SymbolTable table = typeEnvironment.peek();
@@ -508,6 +592,7 @@ public class ScopeVisitor implements Visitor {
         parenthesisVariablesNode.getId().accept(this);
         return null;
     }
+
 
     public boolean checkVardecl(VariableDeclarationOperationNode vars){
 

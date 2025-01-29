@@ -550,5 +550,20 @@ public class PrintAST implements Visitor {
         return null;
     }
 
+    @Override
+    public Object visit(MapSum mapSum) {
+        return null;
+    }
+
+    @Override
+    public Object visit(LetGoWhen letGoWhen) {
+        return null;
+    }
+
+    @Override
+    public Object visit(GoWhen goWhen) {
+        return null;
+    }
+
 
 }

@@ -19,7 +19,7 @@ terminal            IF, THEN, ELSE;
 terminal            WHILE, DO, RETURN;
 terminal            REF, DEF;
 terminal            INT, BOOL, DOUBLE, STRING, CHAR;
-terminal            PROGRAM, BEGIN, END;
+terminal            PROGRAM, BEGIN, END, MAPSUM;
 
 /** Constants **/
 terminal            TRUE, FALSE;
@@ -34,8 +34,8 @@ terminal            AND, OR, NOT;
 terminal            GT, GE, LT, LE, EQ, NE; //NE is missing in the syntactic specification
 
 /** Parenthesis & Symbols **/
-terminal            LPAR, RPAR, LBRAC, RBRAC;
-terminal            PIPE, COMMA;
+terminal            LPAR, RPAR, LBRAC, RBRAC, LET, GO, WHEN, LOOP, OTHER, DOT;
+terminal            PIPE, COMMA,DOFOR, FOR;
 terminal            SEMI;
 terminal            ASSIGN, COLON, ASSIGNDECL;
 
@@ -47,19 +47,20 @@ terminal IN, OUT, OUTNL;
 
 /* Non terminals */
 non terminal        Programma;
-non terminal        AirthOp, BoolOp, RelOp;
 
 /** Expressions & Statements **/
+
 non terminal        Expr;
 non terminal        ArrayList<ExpressionOperationNode> Exprs;
 non terminal        Stat;
 non terminal        ArrayList<StatementOperationNode> Statements;
 non terminal        Body;
+non terminal        MapSum;
 non terminal        FunCall;
 
 /** Types and Constants **/
 non terminal        OptType, TypeOrConstant;
-non terminal        Constant, Type;
+non terminal        Constant, Type, GoWhen;
 
 /** List of variables **/
 non terminal        ParDecl;
@@ -149,6 +150,7 @@ OptType ::= COLON Type:t {:RESULT=t;:}
 
 Body ::= LBRAC VarDecls:declarations Statements:statements RBRAC{:RESULT=new BodyOperationNode(declarations, statements);:};
 
+
 //AGGIUNTA DEL NUOVO ELEMENTO IN TESTA E NON IN CODA
 Statements ::= Stat:statement Statements:list{:list.add(0,(StatementOperationNode) statement); RESULT = list;:}
             | {: ArrayList<StatementOperationNode> list = new ArrayList<>();
@@ -158,11 +160,15 @@ Stat ::= Vars:vars_list IN SEMI {:RESULT = new ReadOperationNode(vars_list);:}
     | Exprs:expression_list OUT SEMI {:RESULT = new WriteOperationNode(expression_list,false);:}
     | Exprs:expression_list OUTNL SEMI {:RESULT = new WriteOperationNode(expression_list,true); :}
     | Vars:vars_list ASSIGN Exprs:expression_list SEMI {:RESULT = new AssignOperationNode(vars_list,expression_list);:}
+    | MapSum:map_sum SEMI {:RESULT= map_sum;:}
     | FunCall:function_call SEMI {:RESULT= function_call;:}
     | IF LPAR Expr:expression RPAR THEN Body:ifBody ELSE Body:elseBody {:RESULT= new IfThenElseOperationNode(expression,ifBody,elseBody);:}
     | IF LPAR Expr:expression RPAR THEN Body:ifBody{:RESULT= new IfThenOperationNode(expression,ifBody);:}
     | WHILE LPAR Expr:expression RPAR DO Body:whileBody {:RESULT= new WhileOperationNode(expression,whileBody);:}
+    | LET VarDecls:declarations GoWhen:first GoWhen:second DOT OTHER DOT DO LBRAC Statements:stats RBRAC SEMI{:RESULT = new LetGoWhen(declarations, first,second,stats);:}
     | RETURN Expr:e SEMI{:RESULT= new ReturnStatementNode(e);:};
+
+GoWhen ::= GO DOT WHEN LPAR Expr:expr RPAR DOT LOOP Body:body{:RESULT= new GoWhen(expr,body);:};
 
 Vars ::= ID:attrib PIPE Vars:list {: list.add(new IdentifierNode(attrib));
                                      RESULT = list;
@@ -186,7 +192,7 @@ FunCall ::= ID:attrib LPAR Exprs:ref RPAR {: RESULT = new FunCallNode(new Identi
         | ID:attrib LPAR RPAR {: RESULT = new FunCallNode(new IdentifierNode(attrib)); :}
         ;
 
-
+MapSum ::=  MAPSUM LPAR ID:funName COMMA LPAR Exprs:expr1 RPAR COMMA LPAR Exprs:expr2 RPAR COMMA LPAR Exprs:expr3 RPAR RPAR {: RESULT = new MapSum(new IdentifierNode(funName),expr1,expr2,expr3);:};
 
 
     Expr ::= Expr:e1 PLUS Expr:e2       {:RESULT = new BinaryOperationNode(e1,"PLUS",e2);:}
@@ -205,8 +211,10 @@ FunCall ::= ID:attrib LPAR Exprs:ref RPAR {: RESULT = new FunCallNode(new Identi
               | MINUS Expr:e1 {: RESULT = new UnaryOperationNode("MINUS",e1);  :} %prec UMINUS
               | NOT Expr:e1   {: RESULT = new UnaryOperationNode("NOT",e1);  :}
               | ID:id         {: RESULT = new IdentifierNode(id);:}
+              | MapSum:e1 {:RESULT= e1;:}
               // Funcall utilizzate nelle espressione
               | FunCall:e1  {:RESULT= e1;:}
+
               | Constant:e1 {:RESULT= e1;:};
 
 

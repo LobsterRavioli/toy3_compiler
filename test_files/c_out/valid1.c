@@ -57,14 +57,18 @@ char* bool2str(int b)
 
 
 
+int myfun_fun(int a,int b);
+
 void sommac_fun(double a,double d,double b,char* *size,double *result);
 
 char* stampa_fun(char* messaggio);
 
 int c = 1;
+int ciao = 3;
 double a,b,x;
 char* taglia,*ans1,*ans;
 double risultato;
+int myfun_fun(int a,int b){return 1;}
 void sommac_fun(double a,double d,double b,char* *size,double *result){*result = a + b + c + d;
 if(*result > 100){*size = "grande";
 }else{if(*result > 50){*size = "media";
@@ -86,8 +90,6 @@ risultato = 0.0;
 
 ans = "no";
 
-sommac_fun(a, x, b, &taglia, &risultato)
-;
 stampa_fun(string_concat(string_concat(string_concat(string_concat(string_concat(string_concat(string_concat("La somma di ", float2str(a)), " e "), float2str(b)), " incrementata di "), int2str(c)), " è "), taglia))
 ;
 stampa_fun(string_concat("Ed è pari a ", float2str(risultato)))
