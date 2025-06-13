@@ -24,19 +24,29 @@ Il progetto è sviluppato in Java ed è basato su strumenti consolidati come **J
 ## Struttura del progetto
 
 ```
-srcjflexcup/
-  ├── lexical_specification_toy3.flex   # Definizione lexer JFlex
-  ├── grammar_specification_toy3.cup    # Definizione parser JavaCup
-src/
-  └── main/                             # Codice Java del compilatore
-tests/
-  └── valid1/valid1.txt                 # File di test Toy3
-  └── valid2/valid2.txt
-  └── valid3/valid3.txt
-  └── valid4/valid4.txt
-test_files/
-  └── c_out/                           # Codice C generato
-pom.xml                              # Configurazione Maven
+toy3_compiler/
+├── README.md                 # Documentazione del progetto
+├── pom.xml                  # Configurazione Maven per compilare ed eseguire
+├── run_tests.sh             # Script per eseguire i test automaticamente
+├── src/                     # Codice sorgente Java
+│   ├── main/                # Codice principale
+│   └── test/                # Test Java
+├── srcjflexcup/             # File di specifica per Lexer e Parser
+│   ├── *.flex               # Definizioni lessicali (lexer)
+│   └── *.cup                # Definizioni sintattiche (parser)
+├── target/                  # File generati da Maven (classi compilate)
+├── tests/                   # Cartelle con i test divisi per gruppi
+│   ├── valid1/
+│   ├── valid2/
+│   ├── valid3/
+│   └── valid4/
+├── valid1.txt               # File di test Toy3
+├── valid2.txt
+├── valid3.txt
+├── valid4.txt
+├── test_files/              # Output generati (codice C)
+│   └── c_out/
+└── altri file e cartelle per report e dati XML
 ```
 
 ---
