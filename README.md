@@ -27,7 +27,6 @@ Il progetto è sviluppato in Java ed è basato su strumenti consolidati come **J
 toy3_compiler/
 ├── README.md                 # Documentazione del progetto
 ├── pom.xml                  # Configurazione Maven per compilare ed eseguire
-├── run_tests.sh             # Script per eseguire i test automaticamente
 ├── src/                     # Codice sorgente Java
 │   ├── main/                # Codice principale
 │   └── test/                # Test Java
