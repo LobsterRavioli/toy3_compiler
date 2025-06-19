@@ -17,9 +17,10 @@ The project is developed in Java and is based on well-established tools like **J
 - **Semantic Analysis**: scope management, type checking, inference, and parameter verification.
 - **C Code Generation**: the AST is translated into readable and compilable C code.
 - Support for classic constructs: functions, variables, references, control commands (if, while), blocks.
-
-<img src="assets/dragonbook_page7.jpg" alt="Dragon Book page 7" width="300"/>
-
+- 
+<p align="center">
+  <img src="assets/dragonbook_page7.jpg" alt="Dragon Book page 7" width="300"/>
+</p>
 ---
 
 ## Project Structure
