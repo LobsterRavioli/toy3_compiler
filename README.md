@@ -21,6 +21,7 @@ The project is developed in Java and is based on well-established tools like **J
 <p align="center">
   <img src="assets/dragonbook_page7.jpg" alt="Dragon Book page 7" width="300"/>
 </p>
+
 ---
 
 ## Project Structure
