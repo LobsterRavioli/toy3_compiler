@@ -18,7 +18,7 @@ The project is developed in Java and is based on well-established tools like **J
 - **C Code Generation**: the AST is translated into readable and compilable C code.
 - Support for classic constructs: functions, variables, references, control commands (if, while), blocks.
 - 
-![alt text](<assets/Dragon Book pagina 7_page-0001.jpg>)
+
 ---
 
 ## Project Structure
