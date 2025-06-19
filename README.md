@@ -19,6 +19,8 @@ The project is developed in Java and is based on well-established tools like **J
 - Support for classic constructs: functions, variables, references, control commands (if, while), blocks.
 - 
 
+<img src="assets/dragonbook_page7.jpg" alt="Dragon Book page 7" width="400"/>
+
 ---
 
 ## Project Structure
